@@ -1,3 +1,42 @@
+# from collections import deque
+
+# def fromsum_dfs(v,s,g,m):
+#     queue = deque([v])
+#     while queue:
+#         intensity, node = queue.popleft()
+#         visited[node] = True
+#         max_intensity = max(m, intensity)
+#         if node in g:
+#             answer.append([s, max_intensity])
+#             break
+#         for c in graph[node]:
+#             w, d = c
+#             if not visited[d]:
+#                 fromsum_dfs([w,d],s,g,max_intensity)
+
+# def solution(n,paths, gates, summits):
+#     # n : xx 산의 지점 수
+#     # paths : 각 등산로의 정보를 담은 2차원 정수 배열
+#     # gates : 출입구들의 번호가 담긴 정수 배열
+#     # summits : 산봉우리들의 번호가 담긴 정수 배열
+#     # return : [산봉우리의 번호, intensity의 최솟값]
+#     global graph
+#     global visited
+#     global answer
+#     graph = {}
+#     for p in paths:
+#         i, j , w = p
+#         graph[i] = graph.get(i, [])+[[w,j]]
+#         graph[j] = graph.get(j, [])+[[w,i]]
+#         graph[i].sort()
+#         graph[j].sort()
+#     answer = []
+#     for s in summits:
+#         visited = [False] * (n+1)
+#         fromsum_dfs([0,s],s,gates,0)
+#     answer.sort(key=lambda x: (x[1],x[0]))
+#     return answer[0]
+
 def solution(n, paths, gates, summits):
     field = {}
     answer = [-1, 10000001]
@@ -15,6 +54,7 @@ def solution(n, paths, gates, summits):
     
     # check : 정상 확인용
     check = set(summits)
+    # stack : gates에서부터 시작
     stack = gates
     # 첫번째 반복문 : 정상까지 도달할 단계가 더 존재하는지 아닌지 확인
     while stack:
