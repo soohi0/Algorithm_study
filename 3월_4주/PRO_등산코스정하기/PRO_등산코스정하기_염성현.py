@@ -44,7 +44,10 @@ def solution(n, paths, gates, summits):
     # 경로 맵 초기화
     for A, B, time in paths:
         for x, y in ((A, B), (B,A)):
-            field[x] = field.get(x,[]) + [(y,time)]
+            try:
+                field[x].append((y, time))
+            except:
+                field[x] = [(y, time)]
     
     # intensity 최대값으로 초기화, 다익스트라(?)
     intensity = [10000001] * (n+1)
