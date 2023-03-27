@@ -11,7 +11,7 @@ def solve(r, c, user_loc, krajs, queries):
         r (int): 필드의 세로 길이
         c (int): 필드의 가로 길이
         user_loc (list): 유저의 초기 위치
-        krajs (set(list)): 미친 아두이노들의 현재 위치를 set으로
+        krajs (set(list)): 미친 아두이노들의 현재 위치를 set으로 저장
         queries (list): 유저의 이동방향을 0부터 시작하는 숫자로 표현한 리스트
     """
     for X, query in enumerate(queries, 1):
