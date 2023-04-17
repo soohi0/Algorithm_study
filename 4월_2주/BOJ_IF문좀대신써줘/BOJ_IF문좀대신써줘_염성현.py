@@ -1,3 +1,5 @@
+import sys 
+input = lambda : sys.stdin.readline()
 N, M = map(int,input().split())
 P = [input().split() for _ in range(N)]
 def bs(rank, cnt):
