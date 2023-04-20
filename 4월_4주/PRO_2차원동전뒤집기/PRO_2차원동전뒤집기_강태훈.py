@@ -1,26 +1,21 @@
 from heapq import heappush, heappop
 
-def transform(ns, ms):
+def transform(n, m, ns, ms):
     init_val = int(ms, 2)
-    for tok in ns:
-        yield (((1<<len(ms))-1)*int(tok))^init_val
+    return [(((1<<m)-1)*int(tok))^init_val for tok in ns]
 
 def get_case(n, m):
     hq = []
-    for i in range(2**(n+m)):
+    for i in range(2**(n+m)-1):
         cmd = format(i, "b").zfill(n+m)
         heappush(hq, [cmd.count("1"), cmd])
     while hq:
         cnt, case = heappop(hq)
-        yield cnt, transform(case[:n], case[n:])
+        yield cnt, transform(n, m, case[:n], case[n:])
     
 def solution(beginning, target):
-    n, m = len(beginning), len(beginning[0])
-    beginning = [int("".join(map(str,x)),2) for x in beginning]
-    target = [int("".join(map(str,x)),2) for x in target]
-    val = tuple([i^j for i, j in zip(beginning, target)])
-    for cnt, cmd in get_case(n, m):
-        cmd = tuple(cmd)
+    val = [int("".join(map(str,i)),2)^int("".join(map(str,j)),2) for i, j in zip(beginning, target)]
+    for cnt, cmd in get_case(len(beginning), len(beginning[0])):
         if val == cmd:
             return cnt
     return -1
