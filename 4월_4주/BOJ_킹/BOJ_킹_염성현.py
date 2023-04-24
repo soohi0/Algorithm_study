@@ -11,7 +11,7 @@ direction = {'R':(0,1),
              'LB':(1,-1)}
 
 def chess_to_idx(p):
-    return 8-int(p[1]),int(ord(p[0])-ord('A'))
+    return (8-int(p[1]),int(ord(p[0])-ord('A')))
 def idx_to_chess(p):
     return chr(ord('A')+p[1])+str(8-p[0])
 
