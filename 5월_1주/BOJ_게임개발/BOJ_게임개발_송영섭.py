@@ -2,7 +2,7 @@ import sys
 from collections import defaultdict, deque
 input = sys.stdin.readline
 
-def search(n: int, num: int, graph: dict, time_list: list, memory: list) -> int:
+def search(num: int, graph: dict, time_list: list, memory: list) -> int:
     que = deque()
     que.append(num)
 
@@ -13,7 +13,7 @@ def search(n: int, num: int, graph: dict, time_list: list, memory: list) -> int:
     while que:
         cur_val = que.popleft()
         if len(graph[cur_val]) > 1:
-            sum_val += max(*[search(n, next_val, graph, time_list, memory) for next_val in graph[cur_val]])
+            sum_val += max(*[search(next_val, graph, time_list, memory) for next_val in graph[cur_val]])
         elif graph[cur_val]:
             next_val = graph[cur_val][0]
             sum_val += time_list[next_val]
@@ -23,10 +23,10 @@ def search(n: int, num: int, graph: dict, time_list: list, memory: list) -> int:
     return sum_val
 
 def solution(n: int, graph: dict, time_list: list) -> None:
-    dy = [0] * (N+1)
+    dy = [0] * (n+1)
     result = [] 
     for num in range(1, n+1):
-        result.append(search(n, num, graph, time_list, dy))
+        result.append(search(num, graph, time_list, dy))
 
     for i in result:
         print(i)
